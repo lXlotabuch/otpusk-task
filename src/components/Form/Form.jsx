@@ -44,7 +44,7 @@ export const Form = () => {
           localStorage.setItem('token', data.token);
         }
         dispatch(logIn());
-        // history.push('/');
+        history.push('/');
       }
     }
   };
