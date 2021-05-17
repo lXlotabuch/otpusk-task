@@ -1,13 +1,24 @@
-import { Button, Grid, Paper, TextField } from '@material-ui/core';
+import {
+  Button,
+  Checkbox,
+  FormControlLabel,
+  Grid,
+  Paper,
+  TextField,
+} from '@material-ui/core';
 import React, { useState } from 'react';
 import { validation } from '../../utils/validation';
 import { authenticateUser } from '../../sdk.js';
 import { useHistory } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { logIn } from '../../store/auth/action';
 
 export const Form = () => {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
+  const [remember, setRemember] = useState(false);
   const history = useHistory();
 
   const paperStyle = {
@@ -29,7 +40,11 @@ export const Form = () => {
       const res = await authenticateUser(values);
       const data = await res.json();
       if (res.status === 200) {
-        history.push('/');
+        if (remember) {
+          localStorage.setItem('token', data.token);
+        }
+        dispatch(logIn());
+        // history.push('/');
       }
     }
   };
@@ -84,6 +99,17 @@ export const Form = () => {
             error={!!errors.password}
             helperText={errors?.password}
             fullWidth
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                name='remember'
+                color='primary'
+                checked={remember}
+                onChange={e => setRemember(e.target.checked)}
+              />
+            }
+            label='Remember me'
           />
           <Button
             type='submite'
