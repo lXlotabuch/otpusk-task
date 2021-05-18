@@ -43,7 +43,7 @@ export const Form = () => {
         if (remember) {
           localStorage.setItem('token', data.token);
         }
-        dispatch(logIn());
+        dispatch(logIn(email));
         history.push('/');
       }
     }
