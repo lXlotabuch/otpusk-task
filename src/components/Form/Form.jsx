@@ -13,6 +13,13 @@ import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { logIn } from '../../store/auth/action';
 
+const paperStyle = {
+  padding: 20,
+  height: '40vh',
+  width: 280,
+  margin: '20px auto',
+};
+
 export const Form = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
@@ -20,13 +27,6 @@ export const Form = () => {
   const [errors, setErrors] = useState({});
   const [remember, setRemember] = useState(false);
   const history = useHistory();
-
-  const paperStyle = {
-    padding: 20,
-    height: '40vh',
-    width: 280,
-    margin: '20px auto',
-  };
 
   const handleSubmite = async e => {
     e.preventDefault();

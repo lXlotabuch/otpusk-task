@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import { selectIsLogin } from '../../store/auth/reducer';
 import { Form } from '../Form/Form';
 import { SecretRoute } from '../SecretRoute/SecretRoute';
+import { Tickets } from '../Tickets/Tickets';
 
 export const Router = () => {
   const isLogin = useSelector(selectIsLogin);
@@ -11,7 +12,7 @@ export const Router = () => {
     <Switch>
       <Route exact path='/'>
         <SecretRoute flag={!isLogin} pathTo='/auth'>
-          <h1>Home Page</h1>
+          <Tickets />
         </SecretRoute>
       </Route>
       <Route exact path='/auth'>

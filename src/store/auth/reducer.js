@@ -8,6 +8,7 @@ const initialState = {
 export const MODULE_NAME = 'auth';
 
 export const selectIsLogin = state => state[MODULE_NAME].isLogin;
+export const selectUserEmail = state => state[MODULE_NAME].userEmail;
 
 export const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
